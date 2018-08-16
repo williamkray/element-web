@@ -25,12 +25,6 @@ require('gfm.css/gfm.css');
 require('highlight.js/styles/github.css');
 require('draft-js/dist/Draft.css');
 
-
-// Load indexeddbshim
-const setGlobalVars = require('indexeddbshim');
-global.window = global;
-setGlobalVars();
-
 const rageshake = require("matrix-react-sdk/lib/rageshake/rageshake");
 rageshake.init().then(() => {
     console.log("Initialised rageshake: See https://bugs.chromium.org/p/chromium/issues/detail?id=583193 to fix line numbers on Chrome.");
