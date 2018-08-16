@@ -10,7 +10,8 @@ module.exports = {
     entry: {
         // Load babel-polyfill first to avoid issues where some imports (namely react)
         // are potentially loaded before babel-polyfill.
-        "bundle": ["babel-polyfill", "indexeddbshim", "./src/vector/index.js"],
+        "bundle": ["babel-polyfill", "./src/vector/index.js"],
+        "indexeddbshim": "indexeddbshim",
         "indexeddb-worker": "./src/vector/indexeddb-worker.js",
 
         // We ship olm.js as a separate lump of javascript. This makes it get
