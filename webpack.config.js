@@ -13,6 +13,8 @@ module.exports = {
         "bundle": ["babel-polyfill", "./src/vector/index.js"],
         "indexeddb-worker": "./src/vector/indexeddb-worker.js",
 
+        "mobileguide": "./src/vector/mobile_guide/index.js",
+
         // We ship olm.js as a separate lump of javascript. This makes it get
         // loaded via a separate <script/> tag in index.html (which loads it
         // into the browser global `Olm`, where js-sdk expects to find it).
@@ -34,7 +36,6 @@ module.exports = {
             { test: /\.js$/, use: "babel-loader", include: path.resolve(__dirname, 'src') },
             {
                 test: /\.scss$/,
-
                 // 1. postcss-loader turns the SCSS into normal CSS.
                 // 2. raw-loader turns the CSS into a javascript module
                 //    whose default export is a string containing the CSS.
@@ -54,7 +55,8 @@ module.exports = {
                             }
                         }
                     ],
-                }),            },
+                }),
+            },
             {
                 // this works similarly to the scss case, without postcss.
                 test: /\.css$/,
@@ -140,9 +142,15 @@ module.exports = {
             // bottom of <head> or the bottom of <body>, and I'm a bit scared
             // about moving them.
             inject: false,
+            excludeChunks: ['mobileguide'],
             vars: {
                 og_image_url: og_image_url,
             },
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/vector/mobile_guide/index.html',
+            filename: 'mobile_guide/index.html',
+            chunks: ['mobileguide'],
         }),
     ],
     devtool: 'source-map',
