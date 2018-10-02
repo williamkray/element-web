@@ -11,6 +11,7 @@ module.exports = {
         // Load babel-polyfill first to avoid issues where some imports (namely react)
         // are potentially loaded before babel-polyfill.
         "bundle": ["babel-polyfill", "./src/vector/index.js"],
+        "indexeddbshim": "indexeddbshim",
         "indexeddb-worker": "./src/vector/indexeddb-worker.js",
 
         "mobileguide": "./src/vector/mobile_guide/index.js",
