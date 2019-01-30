@@ -17,16 +17,25 @@ module.exports = {
         "mobileguide": "./src/vector/mobile_guide/index.js",
 
         // CSS themes
-        "theme-light":  "./node_modules/matrix-react-sdk/res/themes/light/css/light.scss",
-        "theme-dark":   "./node_modules/matrix-react-sdk/res/themes/dark/css/dark.scss",
+        //"theme-light":  "./node_modules/matrix-react-sdk/res/themes/light/css/light.scss",
+        //"theme-dark":   "./node_modules/matrix-react-sdk/res/themes/dark/css/dark.scss",
         "theme-dharma": "./node_modules/matrix-react-sdk/res/themes/dharma/css/dharma.scss",
-        "theme-status": "./res/themes/status/css/status.scss",
-        "theme-blueshine": "./res/themes/blueshine/css/blueshine.scss",
+        //"theme-status": "./res/themes/status/css/status.scss",
+        //"theme-blueshine": "./res/themes/blueshine/css/blueshine.scss",
     },
     module: {
         rules: [
             { enforce: 'pre', test: /\.js$/, use: "source-map-loader", exclude: /node_modules/, },
             { test: /\.js$/, use: "babel-loader", include: path.resolve(__dirname, 'src') },
+            {
+                test: /\.wasm$/,
+                loader: "file-loader",
+                type: "javascript/auto", // https://github.com/webpack/webpack/issues/6725
+                options: {
+                    name: '[name].[hash:7].[ext]',
+                    outputPath: '.',
+                },
+            },
             {
                 test: /\.scss$/,
                 // 1. postcss-loader turns the SCSS into normal CSS.
