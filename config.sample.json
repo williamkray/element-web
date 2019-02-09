@@ -20,7 +20,6 @@
         "feature_no_colour_adjust": "labs"
     },
     "default_federate": true,
-    "welcomePageUrl": "home.html",
     "default_theme": "light",
     "roomDirectory": {
         "servers": [
