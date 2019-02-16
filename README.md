@@ -416,3 +416,6 @@ community engagement
 * hacktoberfest
 * bounty? - proposal to be included in a bounty programme
 * bounty - included in Status Open Bounty
+
+
+This fork includes [Mutant Standard](https://mutant.tech) emotes, which are licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/). 
