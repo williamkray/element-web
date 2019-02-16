@@ -2,15 +2,9 @@
   "name": "riot-web",
   "productName": "RiotPony",
   "main": "electron_app/src/electron-main.js",
-<<<<<<< HEAD
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A feature-rich client for ponies.im",
   "author": "New Vector Ltd. & ponies.im",
-=======
-  "version": "1.0.1",
-  "description": "A feature-rich client for Matrix.org",
-  "author": "New Vector Ltd.",
->>>>>>> 5d2d8ccc7169cf6cbdc980ba54705c9fb27dc463
   "repository": {
     "type": "git",
     "url": "https://github.com/vector-im/riot-web"
