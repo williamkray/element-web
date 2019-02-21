@@ -1,10 +1,10 @@
 {
   "name": "riot-web",
-  "productName": "Riot",
+  "productName": "RiotPony",
   "main": "src/electron-main.js",
   "version": "1.0.1",
-  "description": "A feature-rich client for Matrix.org",
-  "author": "New Vector Ltd.",
+  "description": "A feature-rich client for ponies.im",
+  "author": "New Vector Ltd. & ponies.im",
   "dependencies": {
     "auto-launch": "^5.0.1",
     "electron-window-state": "^4.1.0",
