@@ -24,8 +24,8 @@ released version of Riot:
    as desired. See below for details.
 1. Enter the URL into your browser and log into Riot!
 
-Releases are signed by PGP, and can be checked against the public key
-at https://riot.im/packages/keys/riot.asc .
+Releases are signed using gpg and the OpenPGP standard, and can be checked against the public key located
+at https://packages.riot.im/riot-release-key.asc.
 
 Note that Chrome does not allow microphone or webcam access for sites served
 over http (except localhost), so for working VoIP you will need to serve Riot
@@ -34,11 +34,18 @@ over https.
 ### Desktop Installation for Debian Stretch
 
 1. Add the repository to your sources.list using either of the following two options:
-  - Directly to sources.list: `echo "deb https://riot.im/packages/debian/ stretch main" | sudo tee -a /etc/apt/sources.list`
-  - As a separate entry in sources.list.d: `echo "deb https://riot.im/packages/debian/ stretch main" | sudo tee /etc/apt/sources.list.d/riot.list`
-2. Add the gpg signing key for the riot repository: `curl -s https://riot.im/packages/debian/repo-key.asc | sudo apt-key add -`
-3. Update your package lists: `sudo apt-get update`
-4. Install Riot: `sudo apt-get install riot-web`
+  - Directly to sources.list:
+`echo "deb https://packages.riot.im/debian/ stretch main" | sudo tee -a /etc/apt/sources.list`
+  - As a separate entry in sources.list.d:
+`echo "deb https://packages.riot.im/debian/ stretch main" | sudo tee /etc/apt/sources.list.d/riot.list`
+2. Download and add the gpg signing key used to authenticate the packages from the riot repository to your system's list of trusted keys:
+`curl -s https://packages.riot.im/debian/riot-im-archive-keyring.asc | sudo apt-key add -`
+- Optional: if you had the old Riot.im signing key in your apt keyring, delete it, as it is no longer considered trusted:
+`sudo apt-key del 0x48E8F4A1`
+3. Update your package lists:
+`sudo apt update`
+4. Install Riot:
+`sudo apt install riot-web`
 
 Important Security Note
 =======================
@@ -238,7 +245,6 @@ All electron packages go into `electron_app/dist/`
 Many thanks to @aviraldg for the initial work on the electron integration.
 
 Other options for running as a desktop app:
- * https://github.com/krisak/vector-electron-desktop
  * @asdf:matrix.org points out that you can use nativefier and it just works(tm)
 
 ```bash
@@ -250,6 +256,8 @@ Desktop app configuration
 =========================
 
 To run multiple instances of the desktop app for different accounts, you can launch the executable with the `--profile` argument followed by a unique identifier, e.g `riot-web --profile Work` for it to run a separate profile and not interfere with the default one.
+
+Alternatively, a custom location for the profile data can be specified using the `--profile-dir` flag followed by the desired path.
 
 To change the config.json for the desktop app, create a config file which will be used to override values in the config which ships in the package:
 + `%APPDATA%\$NAME\config.json` on Windows

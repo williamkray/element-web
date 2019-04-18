@@ -2,7 +2,7 @@
   "name": "riot-web",
   "productName": "RiotPony",
   "main": "src/electron-main.js",
-  "version": "1.0.5,
+  "version": "1.0.8,
   "description": "A feature-rich client for ponies.im",
   "author": "New Vector Ltd. & ponies.im",
   "dependencies": {
