@@ -31,21 +31,8 @@ Note that Chrome does not allow microphone or webcam access for sites served
 over http (except localhost), so for working VoIP you will need to serve Riot
 over https.
 
-### Desktop Installation for Debian Stretch
-
-1. Add the repository to your sources.list using either of the following two options:
-  - Directly to sources.list:
-`echo "deb https://packages.riot.im/debian/ stretch main" | sudo tee -a /etc/apt/sources.list`
-  - As a separate entry in sources.list.d:
-`echo "deb https://packages.riot.im/debian/ stretch main" | sudo tee /etc/apt/sources.list.d/riot.list`
-2. Download and add the gpg signing key used to authenticate the packages from the riot repository to your system's list of trusted keys:
-`curl -s https://packages.riot.im/debian/riot-im-archive-keyring.asc | sudo apt-key add -`
-- Optional: if you had the old Riot.im signing key in your apt keyring, delete it, as it is no longer considered trusted:
-`sudo apt-key del 0x48E8F4A1`
-3. Update your package lists:
-`sudo apt update`
-4. Install Riot:
-`sudo apt install riot-web`
+To install Riot as a desktop application, see [Running as a desktop
+app](#running-as-a-desktop-app) below.
 
 Important Security Note
 =======================
@@ -202,10 +189,10 @@ Running as a Desktop app
 ========================
 
 Riot can also be run as a desktop app, wrapped in electron. You can download a
-pre-built version from https://riot.im/desktop.html or, if you prefer,
-build it yourself. Requires Electron >=1.6.0
+pre-built version from https://riot.im/download/desktop/ or, if you prefer,
+build it yourself.
 
-To run as a desktop app:
+To build it yourself, follow the instructions below.
 
 1. Follow the instructions in 'Building From Source' above, but run
    `yarn build` instead of `yarn dist` (since we don't need the tarball).
@@ -265,6 +252,42 @@ To change the config.json for the desktop app, create a config file which will b
 + `~Library/Application Support/$NAME/config.json` on macOS
 
 In the paths above, `$NAME` is typically `Riot`, unless you use `--profile $PROFILE` in which case it becomes `Riot-$PROFILE`.
+
+Running from Docker
+===================
+
+The Docker image can be used to serve riot-web as a web server. The easiest way to use 
+it is to use the prebuilt image:
+```bash
+docker run -p 80:80 vectorim/riot-web
+``` 
+
+To supply your own custom `config.json`, map a volume to `/app/config.json`. For example, 
+if your custom config was located at `/etc/riot-web/config.json` then your Docker command
+would be:
+```bash
+docker run -p 80:80 -v /etc/riot-web/config.json:/app/config.json vectorim/riot-web
+```
+
+To build the image yourself:
+```bash
+git clone https://github.com/vector-im/riot-web.git riot-web
+cd riot-web
+git checkout master
+docker build -t vectorim/riot-web .
+```
+
+If you're building a custom branch, or want to use the develop branch, check out the appropriate
+riot-web branch and then run:
+```bash
+docker build -t vectorim/riot-web:develop \
+    --build-arg USE_CUSTOM_SDKS=true \
+    --build-arg REACT_SDK_REPO="https://github.com/matrix-org/matrix-react-sdk.git" \
+    --build-arg REACT_SDK_BRANCH="develop" \
+    --build-arg JS_SDK_REPO="https://github.com/matrix-org/matrix-js-sdk.git" \
+    --build-arg JS_SDK_BRANCH="develop" \
+    .
+```
 
 Labs Features
 =============

@@ -17,7 +17,8 @@
         "feature_nsfw_ponymotes": "labs",
         "feature_no_discord_colours": "labs",
         "feature_no_bridge_badges": "labs",
-        "feature_no_colour_adjust": "labs"
+        "feature_no_colour_adjust": "labs",
+        "feature_reactions": "labs"
     },
     "default_federate": true,
     "default_theme": "light",
