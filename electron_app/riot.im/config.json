@@ -10,6 +10,7 @@
     "integrations_ui_url": "https://dimension.t2bot.io/riot",
     "integrations_rest_url": "https://dimension.t2bot.io/api/v1/scalar",
     "integrations_widgets_urls": ["https://dimension.t2bot.io/widgets"],
+    "hosting_signup_link": "https://modular.im/?utm_source=riot-web&utm_medium=web",
     "bug_report_endpoint_url": "https://riot.im/bugreports/submit",
     "features": {
         "feature_sticker_messages": "enable",

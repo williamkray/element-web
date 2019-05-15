@@ -5,6 +5,9 @@
   "version": "1.0.8",
   "description": "A feature-rich client for ponies.im",
   "author": "New Vector Ltd. & ponies.im",
+  "version": "1.1.1",
+  "description": "A feature-rich client for ponies.im",
+  "author": "New Vector Ltd. & ponies.im",
   "repository": {
     "type": "git",
     "url": "https://github.com/vector-im/riot-web"
@@ -74,8 +77,8 @@
     "gfm.css": "^1.1.2",
     "highlight.js": "^9.13.1",
     "indexeddbshim": "^3.8.0",
-    "matrix-js-sdk": "1.0.4",
-    "matrix-react-sdk": "1.0.7",
+    "matrix-js-sdk": "1.1.0",
+    "matrix-react-sdk": "1.1.1",
     "modernizr": "^3.6.0",
     "olm": "https://packages.matrix.org/npm/olm/olm-3.1.0.tgz",
     "prop-types": "^15.6.2",
@@ -92,7 +95,9 @@
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-async-to-bluebird": "^1.1.1",
+    "babel-plugin-transform-builtin-extend": "^1.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -121,7 +126,6 @@
     "karma": "^3.1.2",
     "karma-chrome-launcher": "^2.2.0",
     "karma-cli": "^1.0.1",
-    "karma-junit-reporter": "^2.0.0",
     "karma-logcapture-reporter": "0.0.1",
     "karma-mocha": "^1.3.0",
     "karma-sourcemap-loader": "^0.3.7",
@@ -152,7 +156,7 @@
   },
   "build": {
     "appId": "im.riot.app",
-    "electronVersion": "4.1.3",
+    "electronVersion": "4.1.5",
     "files": [
       "node_modules/**",
       "src/**",
