@@ -28,7 +28,9 @@
         "feature_nsfw_ponymotes": "labs",
         "feature_no_discord_colours": "labs",
         "feature_room_breadcrumbs": "enable",
-        "feature_disable_mutant_standard": "labs"
+        "feature_disable_mutant_standard": "labs",
+        "feature_reactions": "labs",
+        "feature_custom_status": "labs"
     },
     "default_federate": true,
     "welcomePageUrl" : "home.html",
