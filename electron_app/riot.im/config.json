@@ -30,7 +30,8 @@
         "feature_room_breadcrumbs": "enable",
         "feature_disable_mutant_standard": "labs",
         "feature_reactions": "labs",
-        "feature_custom_status": "labs"
+        "feature_custom_status": "labs",
+        "feature_message_editing": "labs"
     },
     "default_federate": true,
     "welcomePageUrl" : "home.html",
