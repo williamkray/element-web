@@ -1,9 +1,9 @@
 {
   "name": "riot-web",
-  "productName": "RiotPony",
+  "productName": "Revolution",
   "main": "electron_app/src/electron-main.js",
-  "version": "1.1.2",
-  "description": "A feature-rich client for ponies.im",
+  "version": "1.2.1",
+  "description": "A feature-rich [Matrix] client",
   "author": "New Vector Ltd. & ponies.im",
   "repository": {
     "type": "git",
@@ -74,8 +74,8 @@
     "gfm.css": "^1.1.2",
     "highlight.js": "^9.13.1",
     "indexeddbshim": "^3.8.0",
-    "matrix-js-sdk": "1.1.0",
-    "matrix-react-sdk": "1.1.2",
+    "matrix-js-sdk": "2.0.0",
+    "matrix-react-sdk": "1.2.1",
     "modernizr": "^3.6.0",
     "olm": "https://packages.matrix.org/npm/olm/olm-3.1.0.tgz",
     "prop-types": "^15.6.2",

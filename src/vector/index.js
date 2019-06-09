@@ -48,6 +48,7 @@ import * as languageHandler from 'matrix-react-sdk/lib/languageHandler';
 import {_t, _td, newTranslatableError} from 'matrix-react-sdk/lib/languageHandler';
 import AutoDiscoveryUtils from 'matrix-react-sdk/lib/utils/AutoDiscoveryUtils';
 import {AutoDiscovery} from "matrix-js-sdk/lib/autodiscovery";
+import * as Lifecycle from "matrix-react-sdk/lib/Lifecycle";
 
 import url from 'url';
 
@@ -365,13 +366,14 @@ async function loadApp() {
         }).catch(err => {
             console.error(err);
 
-            const errorMessage = err.translatedMessage
+            let errorMessage = err.translatedMessage
                 || _t("Unexpected error preparing the app. See console for details.");
+            errorMessage = <span>{errorMessage}</span>;
 
             // Like the compatibility page, AWOOOOOGA at the user
             const GenericErrorPage = sdk.getComponent("structures.GenericErrorPage");
             window.matrixChat = ReactDOM.render(
-                <GenericErrorPage message={errorMessage} />,
+                <GenericErrorPage message={errorMessage} title={_t("Your Riot is misconfigured")} />,
                 document.getElementById('matrixchat'),
             );
         });
@@ -447,57 +449,88 @@ async function loadLanguage() {
 }
 
 async function verifyServerConfig() {
-    console.log("Verifying homeserver configuration");
+    let validatedConfig;
+    try {
+        console.log("Verifying homeserver configuration");
 
-    // Note: the query string may include is_url and hs_url - we only respect these in the
-    // context of email validation. Because we don't respect them otherwise, we do not need
-    // to parse or consider them here.
+        // Note: the query string may include is_url and hs_url - we only respect these in the
+        // context of email validation. Because we don't respect them otherwise, we do not need
+        // to parse or consider them here.
 
-    const config = SdkConfig.get();
-    let wkConfig = config['default_server_config']; // overwritten later under some conditions
-    const serverName = config['default_server_name'];
-    const hsUrl = config['default_hs_url'];
-    const isUrl = config['default_is_url'];
+        // Note: Although we throw all 3 possible configuration options through a .well-known-style
+        // verification, we do not care if the servers are online at this point. We do moderately
+        // care if they are syntactically correct though, so we shove them through the .well-known
+        // validators for that purpose.
 
-    const incompatibleOptions = [wkConfig, serverName, hsUrl].filter(i => !!i);
-    if (incompatibleOptions.length > 1) {
-        throw newTranslatableError(_td(
-            "Invalid configuration: can only specify one of default_server_config, default_server_name, " +
-            "or default_hs_url.",
-        ));
-    }
-    if (incompatibleOptions.length < 1) {
-        throw newTranslatableError(_td("Invalid configuration: no default server specified."));
-    }
+        const config = SdkConfig.get();
+        let wkConfig = config['default_server_config']; // overwritten later under some conditions
+        const serverName = config['default_server_name'];
+        const hsUrl = config['default_hs_url'];
+        const isUrl = config['default_is_url'];
 
-    if (hsUrl) {
-        console.log("Config uses a default_hs_url - constructing a default_server_config using this information");
+        const incompatibleOptions = [wkConfig, serverName, hsUrl].filter(i => !!i);
+        if (incompatibleOptions.length > 1) {
+            // noinspection ExceptionCaughtLocallyJS
+            throw newTranslatableError(_td(
+                "Invalid configuration: can only specify one of default_server_config, default_server_name, " +
+                "or default_hs_url.",
+            ));
+        }
+        if (incompatibleOptions.length < 1) {
+            // noinspection ExceptionCaughtLocallyJS
+            throw newTranslatableError(_td("Invalid configuration: no default server specified."));
+        }
 
-        wkConfig = {
-            "m.homeserver": {
-                "base_url": hsUrl,
-            },
-        };
-        if (isUrl) {
-            wkConfig["m.identity_server"] = {
-                "base_url": isUrl,
+        if (hsUrl) {
+            console.log("Config uses a default_hs_url - constructing a default_server_config using this information");
+            console.warn(
+                "DEPRECATED CONFIG OPTION: In the future, default_hs_url will not be accepted. Please use " +
+                "default_server_config instead.",
+            );
+
+            wkConfig = {
+                "m.homeserver": {
+                    "base_url": hsUrl,
+                },
             };
+            if (isUrl) {
+                wkConfig["m.identity_server"] = {
+                    "base_url": isUrl,
+                };
+            }
+        }
+
+        let discoveryResult = null;
+        if (wkConfig) {
+            console.log("Config uses a default_server_config - validating object");
+            discoveryResult = await AutoDiscovery.fromDiscoveryConfig(wkConfig);
+        }
+
+        if (serverName) {
+            console.log("Config uses a default_server_name - doing .well-known lookup");
+            console.warn(
+                "DEPRECATED CONFIG OPTION: In the future, default_server_name will not be accepted. Please " +
+                "use default_server_config instead.",
+            );
+            discoveryResult = await AutoDiscovery.findClientConfig(serverName);
+        }
+
+        validatedConfig = AutoDiscoveryUtils.buildValidatedConfigFromDiscovery(serverName, discoveryResult, true);
+    } catch (e) {
+        const {hsUrl, isUrl, userId} = Lifecycle.getLocalStorageSessionVars();
+        if (hsUrl && userId) {
+            console.error(e);
+            console.warn("A session was found - suppressing config error and using the session's homeserver");
+
+            console.log("Using pre-existing hsUrl and isUrl: ", {hsUrl, isUrl});
+            validatedConfig = await AutoDiscoveryUtils.validateServerConfigWithStaticUrls(hsUrl, isUrl, true);
+        } else {
+            // the user is not logged in, so scream
+            throw e;
         }
     }
 
-    let result = null;
 
-    if (wkConfig) {
-        console.log("Config uses a default_server_config - validating object");
-        result = await AutoDiscovery.fromDiscoveryConfig(wkConfig);
-    }
-
-    if (serverName) {
-        console.log("Config uses a default_server_name - doing .well-known lookup");
-        result = await AutoDiscovery.findClientConfig(serverName);
-    }
-
-    const validatedConfig = AutoDiscoveryUtils.buildValidatedConfigFromDiscovery(serverName, result);
     validatedConfig.isDefault = true;
 
     // Just in case we ever have to debug this

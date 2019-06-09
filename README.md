@@ -113,10 +113,10 @@ For a good example, see https://riot.im/develop/config.json.
    Riot to use. The object is the same as returned by [https://<server_name>/.well-known/matrix/client](https://matrix.org/docs/spec/client_server/latest.html#get-well-known-matrix-client),
    with added support for a `server_name` under the `m.homeserver` section to display
    a custom homeserver name. Alternatively, the config can contain a `default_server_name`
-   instead which is where Riot will go to get that same object - see the `.well-known`
-   link above for more information. Note that the `default_server_name` is used to get
-   a complete server configuration whereas the `server_name` in the `default_server_config`
-   is for display purposes only.
+   instead which is where Riot will go to get that same object, although this option is
+   deprecated - see the `.well-known` link above for more information on using this option. 
+   Note that the `default_server_name` is used to get a complete server configuration 
+   whereas the `server_name` in the `default_server_config` is for display purposes only.
    * *Note*: The URLs can also be individually specified as `default_hs_url` and 
      `default_is_url`, however these are deprecated. They are maintained for backwards
      compatibility with older configurations. `default_is_url` is respected only
@@ -134,6 +134,8 @@ For a good example, see https://riot.im/develop/config.json.
    in the `labs` section of settings.  The available optional experimental features vary from
    release to release. Some of the available features are described in the Labs Feature section
    of this README.
+1. `showLabsSettings`: Shows the "labs" tab of user settings even when no `features` are enabled
+   or present. Useful for getting at settings which may be otherwise hidden.
 1. `brand`: String to pass to your homeserver when configuring email notifications, to let the
    homeserver know what email template to use when talking to you.
 1. `branding`: Configures various branding and logo details, such as:
@@ -179,6 +181,9 @@ For a good example, see https://riot.im/develop/config.json.
     1. `homeUrl`: Content shown on the inside of the app when a specific room is
        not selected. By default, no home page is configured. If one is set, a
        button to access it will be shown in the top left menu.
+1. `defaultCountryCode`: The ISO 3166 alpha2 country code to use when showing
+   country selectors, like the phone number input on the registration page.
+   Defaults to `GB` if the given code is unknown or not provided.
 
 
 Note that `index.html` also has an og:image meta tag that is set to an image

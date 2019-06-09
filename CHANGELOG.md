@@ -1,3 +1,38 @@
+Changes in [1.2.1](https://github.com/vector-im/riot-web/releases/tag/v1.2.1) (2019-05-31)
+==========================================================================================
+[Full Changelog](https://github.com/vector-im/riot-web/compare/v1.2.0...v1.2.1)
+
+ * Upgrade JS SDK to 2.0.0 and React SDK to 1.2.1 to fix key backup and native emoji height
+
+Changes in [1.2.0](https://github.com/vector-im/riot-web/releases/tag/v1.2.0) (2019-05-29)
+==========================================================================================
+[Full Changelog](https://github.com/vector-im/riot-web/compare/v1.2.0-rc.1...v1.2.0)
+
+ * Upgrade to JS SDK v1.2.0 and React SDK v1.2.0 to fix some regressions
+
+Changes in [1.2.0-rc.1](https://github.com/vector-im/riot-web/releases/tag/v1.2.0-rc.1) (2019-05-23)
+====================================================================================================
+[Full Changelog](https://github.com/vector-im/riot-web/compare/v1.1.2...v1.2.0-rc.1)
+
+ * Update from Weblate
+   [\#9802](https://github.com/vector-im/riot-web/pull/9802)
+ * remove emojione
+   [\#9766](https://github.com/vector-im/riot-web/pull/9766)
+ * Make Dockerfile work for develop and other branches
+   [\#9736](https://github.com/vector-im/riot-web/pull/9736)
+ * add description of new labs feature for message editing
+   [\#9728](https://github.com/vector-im/riot-web/pull/9728)
+ * Remove karma junit output
+   [\#9628](https://github.com/vector-im/riot-web/pull/9628)
+ * yarn upgrade
+   [\#9626](https://github.com/vector-im/riot-web/pull/9626)
+ * Respond quickly to buildkite pokes
+   [\#9617](https://github.com/vector-im/riot-web/pull/9617)
+ * Delay creating the `Favico` instance
+   [\#9616](https://github.com/vector-im/riot-web/pull/9616)
+ * Add reactions feature to config sample
+   [\#9598](https://github.com/vector-im/riot-web/pull/9598)
+
 Changes in [1.1.2](https://github.com/vector-im/riot-web/releases/tag/v1.1.2) (2019-05-15)
 ==========================================================================================
 [Full Changelog](https://github.com/vector-im/riot-web/compare/v1.1.1...v1.1.2)

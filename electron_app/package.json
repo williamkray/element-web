@@ -1,9 +1,9 @@
 {
   "name": "riot-web",
-  "productName": "RiotPony",
+  "productName": "Revolution",
   "main": "src/electron-main.js",
-  "version": "1.1.2",
-  "description": "A feature-rich client for ponies.im",
+  "version": "1.2.1",
+  "description": "A feature-rich [Matrix] client",
   "author": "New Vector Ltd. & ponies.im",
   "dependencies": {
     "auto-launch": "^5.0.1",

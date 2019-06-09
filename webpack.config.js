@@ -79,7 +79,7 @@ module.exports = {
                 // lifetime for assets while still delivering changes quickly.
                 oneOf: [
                     {
-                        // Images referenced in CSS files
+                        // Assets referenced in CSS files
                         issuer: /\.(scss|css)$/,
                         loader: 'file-loader',
                         options: {
@@ -95,11 +95,15 @@ module.exports = {
                         },
                     },
                     {
-                        // Images referenced in HTML and JS files
+                        // Assets referenced in HTML and JS files
                         loader: 'file-loader',
                         options: {
                             name: '[name].[hash:7].[ext]',
                             outputPath: getImgOutputPath,
+                            publicPath: function(url, resourcePath) {
+                                const outputPath = getImgOutputPath(url, resourcePath);
+                                return toPublicPath(outputPath);
+                            },
                         },
                     },
                 ],
