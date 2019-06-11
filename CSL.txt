@@ -1,5 +1,5 @@
-RiotPony
-Copyright ponies.im 2018
+Revolution
+Copyright ponies.im 2018, 2019
 
 COOPERATIVE SOFTWARE LICENSE
 
@@ -61,6 +61,7 @@ AND CONDITIONS OF THIS LICENSE.
           folklore; (ii) in the case of a phonogram the producer being the
           person or legal entity who first fixes the sounds of a
           performance or other sounds; and, (iii) in the case of
+          broadcasts, the organization that transmits the broadcast.
 
           f. "Work" means the literary and/or artistic work offered under
           the terms of this License including without limitation any
@@ -214,17 +215,17 @@ AND CONDITIONS OF THIS LICENSE.
           Service.
 
           e. You may exercise the rights granted in Section 3 for
-          commercial purposes only if you statisy any of the following:
+          commercial purposes only if you satisfy any of the following:
 
                 i. You are a worker-owned business or worker-owned
                 collective; and
-                ii.  after tax, all financial gain, surplus, profits and 
+                ii.  after tax, all financial gain, surplus, profits and
                 benefits produced by the business or collective are
                 distributed among the worker-owners
-		iii. You are not using such rights on behalf of a business
-		other than those specified in 4(e.i) and elaborated upon in
+                iii. You are not using such rights on behalf of a business
+                other than those specified in 4(e.i) and elaborated upon in
                 4(e.ii), nor are using such rights as a proxy on behalf of a
-                business with the intent to circumvent the aformentioned
+                business with the intent to circumvent the aforementioned
                 restrictions on such a business.
 
           f. Any use by a business that is privately owned and managed,
