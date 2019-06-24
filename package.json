@@ -2,7 +2,7 @@
   "name": "riot-web",
   "productName": "Revolution",
   "main": "electron_app/src/electron-main.js",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A feature-rich [Matrix] client",
   "author": "New Vector Ltd. & ponies.im",
   "repository": {
@@ -73,9 +73,14 @@
     "gemini-scrollbar": "github:matrix-org/gemini-scrollbar#b302279",
     "gfm.css": "^1.1.2",
     "highlight.js": "^9.13.1",
+<<<<<<< HEAD
     "indexeddbshim": "^3.8.0",
     "matrix-js-sdk": "2.0.0",
     "matrix-react-sdk": "1.2.1",
+=======
+    "matrix-js-sdk": "2.0.1",
+    "matrix-react-sdk": "1.2.2",
+>>>>>>> fceb05e6466deb1dccf4885175e200264f8b0794
     "modernizr": "^3.6.0",
     "olm": "https://packages.matrix.org/npm/olm/olm-3.1.0.tgz",
     "prop-types": "^15.6.2",
@@ -155,10 +160,10 @@
     "electronVersion": "4.2.4",
     "files": [
       "node_modules/**",
-      "src/**",
-      "img/**"
+      "src/**"
     ],
     "extraResources": [
+      { "from": "electron_app/img", "to": "img" },
       "webapp/**/*",
       "origin_migrator/**/*"
     ],
