@@ -1,8 +1,8 @@
 /*
 Copyright 2016 Aviral Dasgupta
 Copyright 2016 OpenMarket Ltd
-Copyright 2017 Michael Telatynski <7t3chguy@gmail.com>
-Copyright 2018 New Vector Ltd
+Copyright 2018, 2019 New Vector Ltd
+Copyright 2017, 2019 Michael Telatynski <7t3chguy@gmail.com>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23,7 +23,10 @@ limitations under the License.
 const checkSquirrelHooks = require('./squirrelhooks');
 if (checkSquirrelHooks()) return;
 
-const argv = require('minimist')(process.argv);
+const argv = require('minimist')(process.argv, {
+    alias: {help: "h"},
+});
+
 const {app, ipcMain, powerSaveBlocker, BrowserWindow, Menu, autoUpdater, protocol} = require('electron');
 const AutoLaunch = require('auto-launch');
 const path = require('path');
@@ -36,6 +39,19 @@ const { migrateFromOldOrigin } = require('./originMigrator');
 
 const windowStateKeeper = require('electron-window-state');
 const Store = require('electron-store');
+
+if (argv["help"]) {
+    console.log("Options:");
+    console.log("  --profile-dir {path}: Path to where to store the profile.");
+    console.log("  --profile {name}:     Name of alternate profile to use, allows for running multiple accounts.");
+    console.log("  --devtools:           Install and use react-devtools and react-perf.");
+    console.log("  --no-update:          Disable automatic updating.");
+    console.log("  --hidden:             Start the application hidden in the system tray.");
+    console.log("  --help:               Displays this help message.");
+    console.log("And more such as --proxy, see:" +
+        "https://github.com/electron/electron/blob/master/docs/api/chrome-command-line-switches.md");
+    app.exit();
+}
 
 // boolean flag set whilst we are doing one-time origin migration
 // We only serve the origin migration script while we're actually
@@ -156,6 +172,14 @@ ipcMain.on('ipcCall', async function(ev, payload) {
         case 'setMinimizeToTrayEnabled':
             store.set('minimizeToTray', global.minimizeToTray = args[0]);
             break;
+        case 'getAutoHideMenuBarEnabled':
+            ret = global.mainWindow.isMenuBarAutoHide();
+            break;
+        case 'setAutoHideMenuBarEnabled':
+            store.set('autoHideMenuBar', args[0]);
+            global.mainWindow.setAutoHideMenuBar(args[0]);
+            global.mainWindow.setMenuBarVisibility(!args[0]);
+            break;
         case 'getAppVersion':
             ret = app.getVersion();
             break;
@@ -172,6 +196,9 @@ ipcMain.on('ipcCall', async function(ev, payload) {
             migratingOrigin = true;
             await migrateFromOldOrigin();
             migratingOrigin = false;
+            break;
+        case 'getConfig':
+            ret = vectorConfig;
             break;
         default:
             mainWindow.webContents.send('ipcReply', {
@@ -208,7 +235,14 @@ const launcher = new AutoLaunch({
 // work.
 // Also mark it as secure (ie. accessing resources from this
 // protocol and HTTPS won't trigger mixed content warnings).
-protocol.registerStandardSchemes(['vector'], {secure: true});
+protocol.registerSchemesAsPrivileged([{
+    scheme: 'vector',
+    privileges: {
+        standard: true,
+        secure: true,
+        supportFetchAPI: true,
+    },
+}]);
 
 app.on('ready', () => {
     if (argv['devtools']) {
@@ -310,7 +344,7 @@ app.on('ready', () => {
     mainWindow = global.mainWindow = new BrowserWindow({
         icon: iconPath,
         show: false,
-        autoHideMenuBar: true,
+        autoHideMenuBar: store.get('autoHideMenuBar', true),
 
         x: mainWindowState.x,
         y: mainWindowState.y,

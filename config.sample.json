@@ -8,7 +8,6 @@
             "base_url": "https://vector.im"
         }
     },
-    "disable_identity_server": false,
     "disable_custom_urls": false,
     "disable_guests": false,
     "disable_login_language_selector": false,
@@ -21,15 +20,15 @@
     "defaultCountryCode": "GB",
     "showLabsSettings": false,
     "features": {
-        "feature_groups": "labs",
         "feature_pinning": "labs",
         "feature_round_avatars": "labs",
         "feature_nsfw_ponymotes": "labs",
         "feature_no_discord_colours": "labs",
         "feature_no_bridge_badges": "labs",
         "feature_no_colour_adjust": "labs",
-        "feature_reactions": "labs",
-        "feature_message_editing": "labs"
+        "feature_custom_status": "labs",
+        "feature_custom_tags": "labs",
+        "feature_state_counters": "labs"
     },
     "default_federate": true,
     "default_theme": "light",
