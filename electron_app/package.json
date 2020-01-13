@@ -2,7 +2,7 @@
   "name": "riot-web",
   "productName": "Revolution",
   "main": "src/electron-main.js",
-  "version": "1.4.2",
+  "version": "1.5.7",
   "description": "A feature-rich [Matrix] client",
   "author": "New Vector Ltd. & ponies.im",
   "dependencies": {

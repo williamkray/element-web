@@ -1,7 +1,6 @@
 {
     "update_base_url": "https://ponies.im/download/desktop/update/",
-    "default_hs_url": "https://ponies.im",
-    "default_is_url": "https://vector.im",
+    "default_server_name": "ponies.im",
     "disable_custom_urls": false,
     "disable_guests": true,
     "disable_login_language_selector": false,
@@ -44,6 +43,24 @@
             "sorunome.de",
             "ponies.im"
         ]
+    },
+    "piwik": {
+        "url": "https://piwik.riot.im/",
+        "siteId": 1,
+        "policyUrl": "https://matrix.org/docs/guides/riot_im_cookie_policy"
+    },
+    "phasedRollOut": {
+        "feature_lazyloading": {
+            "offset": 1539684000000,
+            "period": 604800000
+        }
+    },
+    "features": {
+        "feature_lazyloading": "enable"
+    },
+    "enable_presence_by_hs_url": {
+        "https://matrix.org": false,
+        "https://matrix-client.matrix.org": false
     }
 }
 
