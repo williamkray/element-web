@@ -30,7 +30,10 @@
         "feature_disable_mutant_standard": "labs",
         "feature_reactions": "labs",
         "feature_custom_status": "labs",
-        "feature_message_editing": "labs"
+        "feature_message_editing": "labs",
+        "feature_presence_in_room_list": "labs",
+        "feature_cross_signing": "labs",
+        "feature_bridge_state": "labs"
     },
     "default_federate": true,
     "welcomePageUrl" : "home.html",
