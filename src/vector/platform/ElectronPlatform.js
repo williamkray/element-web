@@ -20,10 +20,10 @@ limitations under the License.
 */
 
 import VectorBasePlatform, {updateCheckStatusEnum} from './VectorBasePlatform';
-import BaseEventIndexManager from 'matrix-react-sdk/lib/indexing/BaseEventIndexManager';
-import dis from 'matrix-react-sdk/lib/dispatcher';
-import { _t } from 'matrix-react-sdk/lib/languageHandler';
-import rageshake from 'matrix-react-sdk/lib/rageshake/rageshake';
+import BaseEventIndexManager from 'matrix-react-sdk/src/indexing/BaseEventIndexManager';
+import dis from 'matrix-react-sdk/src/dispatcher';
+import { _t } from 'matrix-react-sdk/src/languageHandler';
+import * as rageshake from 'matrix-react-sdk/src/rageshake/rageshake';
 
 const ipcRenderer = window.ipcRenderer;
 
@@ -144,12 +144,20 @@ class SeshatIndexManager extends BaseEventIndexManager {
         return this._ipcCall('removeCrawlerCheckpoint', checkpoint);
     }
 
+    async loadFileEvents(args): Promise<[EventAndProfile]> {
+        return this._ipcCall('loadFileEvents', args);
+    }
+
     async loadCheckpoints(): Promise<[CrawlerCheckpoint]> {
         return this._ipcCall('loadCheckpoints');
     }
 
     async closeEventIndex(): Promise<> {
         return this._ipcCall('closeEventIndex');
+    }
+
+    async getStats(): Promise<> {
+        return this._ipcCall('getStats');
     }
 
     async deleteEventIndex(): Promise<> {
@@ -192,16 +200,6 @@ export default class ElectronPlatform extends VectorBasePlatform {
 
         this.startUpdateCheck = this.startUpdateCheck.bind(this);
         this.stopUpdateCheck = this.stopUpdateCheck.bind(this);
-
-        this._tryPersistStorage();
-    }
-
-    async _tryPersistStorage() {
-        if (navigator.storage && navigator.storage.persist) {
-            const granted = await navigator.storage.persist();
-            const persisted = await navigator.storage.persisted();
-            console.log("Storage persist request granted: " + granted + " persisted: " + persisted);
-        }
     }
 
     async getConfig(): Promise<{}> {
@@ -386,5 +384,12 @@ export default class ElectronPlatform extends VectorBasePlatform {
 
     getEventIndexingManager(): BaseEventIndexManager | null {
         return this.eventIndexManager;
+    }
+
+    setLanguage(preferredLangs: string[]) {
+        this._ipcCall('setLanguage', preferredLangs).catch(error => {
+            console.log("Failed to send setLanguage IPC to Electron");
+            console.error(error);
+        });
     }
 }

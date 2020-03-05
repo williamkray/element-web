@@ -63,7 +63,7 @@ if (argv["help"]) {
     console.log("  --hidden:             Start the application hidden in the system tray.");
     console.log("  --help:               Displays this help message.");
     console.log("And more such as --proxy, see:" +
-        "https://github.com/electron/electron/blob/master/docs/api/chrome-command-line-switches.md");
+        "https://electronjs.org/docs/api/chrome-command-line-switches#supported-chrome-command-line-switches");
     app.exit();
 }
 
@@ -346,6 +346,18 @@ ipcMain.on('seshat', async function(ev, payload) {
             }
             break;
 
+        case 'getStats':
+            if (eventIndex === null) ret = 0;
+            else {
+                try {
+                    ret = await eventIndex.getStats();
+                } catch (e) {
+                    sendError(payload.id, e);
+                    return;
+                }
+            }
+            break;
+
         case 'removeCrawlerCheckpoint':
             if (eventIndex === null) ret = false;
             else {
@@ -363,6 +375,18 @@ ipcMain.on('seshat', async function(ev, payload) {
             else {
                 try {
                     ret = await eventIndex.addCrawlerCheckpoint(args[0]);
+                } catch (e) {
+                    sendError(payload.id, e);
+                    return;
+                }
+            }
+            break;
+
+        case 'loadFileEvents':
+            if (eventIndex === null) ret = [];
+            else {
+                try {
+                    ret = await eventIndex.loadFileEvents(args[0]);
                 } catch (e) {
                     sendError(payload.id, e);
                     return;
