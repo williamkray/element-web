@@ -1,6 +1,6 @@
 {
   "name": "riot-web",
-  "productName": "chat.horse",
+  "productName": "Revolution",
   "main": "electron_app/src/electron-main.js",
   "version": "1.5.12",
   "description": "A feature-rich client for Matrix.org",
