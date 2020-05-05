@@ -34,7 +34,11 @@
         "feature_no_colour_adjust": "labs",
         "feature_custom_status": "labs",
         "feature_custom_tags": "labs",
-        "feature_state_counters": "labs"
+        "feature_state_counters": "labs",
+        "feature_squircle_avatars": "labs",
+        "feature_super_compact": "labs",
+        "feature_interplanetary_time": "labs",
+        "feature_disable_mutant_standard": "labs"
     },
     "default_federate": true,
     "default_theme": "light",
