@@ -171,11 +171,11 @@
       "webapp/**/*"
     ],
     "linux": {
-      "target": "deb",
+      "target": ["deb", "pacman", "AppImage"],
       "category": "Network;InstantMessaging;Chat",
-      "maintainer": "support@riot.im",
+      "maintainer": "mail@sorunome.de",
       "desktop": {
-        "StartupWMClass": "riot"
+        "StartupWMClass": "revolution"
       }
     },
     "mac": {
