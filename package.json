@@ -184,7 +184,7 @@
     },
     "win": {
       "target": {
-        "target": "squirrel"
+        "target": "nsis"
       },
       "sign": "scripts/electron_winSign"
     },
