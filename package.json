@@ -1,7 +1,7 @@
 {
   "name": "riot-web",
   "productName": "Revolution",
-  "version": "1.6.1",
+  "version": "1.6.4",
   "description": "A feature-rich client for Matrix.org",
   "author": "New Vector Ltd. & ponies.im",
   "repository": {
@@ -58,12 +58,11 @@
   },
   "dependencies": {
     "browser-request": "^0.3.3",
-    "favico.js": "^0.3.10",
     "gfm.css": "^1.1.2",
     "highlight.js": "^9.13.1",
     "indexeddbshim": "^3.8.0",
-    "matrix-js-sdk": "6.1.0",
-    "matrix-react-sdk": "2.6.0",
+    "matrix-js-sdk": "6.2.1",
+    "matrix-react-sdk": "2.7.1",
     "olm": "https://packages.matrix.org/npm/olm/olm-3.1.4.tgz",
     "postcss-easings": "^2.0.0",
     "prop-types": "^15.7.2",
@@ -90,7 +89,9 @@
     "@babel/preset-typescript": "^7.7.4",
     "@babel/register": "^7.7.4",
     "@babel/runtime": "^7.7.6",
+    "@types/flux": "^3.1.9",
     "@types/modernizr": "^3.5.3",
+    "@types/node": "^12.12.41",
     "@types/react": "16.9",
     "@types/react-dom": "^16.9.4",
     "autoprefixer": "^9.7.3",
