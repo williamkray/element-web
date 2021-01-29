@@ -5,7 +5,7 @@ FROM node:12 as builder
 # images of element-web develop.
 ARG USE_CUSTOM_SDKS=true
 ARG REACT_SDK_REPO="https://github.com/williamkray/matrix-react-sdk.git"
-ARG REACT_SDK_BRANCH="v3.12.1-wrecked"
+ARG REACT_SDK_BRANCH="develop"
 ARG JS_SDK_REPO="https://github.com/matrix-org/matrix-js-sdk.git"
 ARG JS_SDK_BRANCH="v9.5.1"
 
