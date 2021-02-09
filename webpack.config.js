@@ -36,6 +36,7 @@ module.exports = (env, argv) => {
 
         entry: {
             "bundle": "./src/vector/index.ts",
+            "indexeddbshim": "indexeddbshim",
             "indexeddb-worker": "./src/vector/indexeddb-worker.js",
             "mobileguide": "./src/vector/mobile_guide/index.js",
             "jitsi": "./src/vector/jitsi/index.ts",
