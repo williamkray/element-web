@@ -5,9 +5,9 @@ FROM node:14-buster as builder
 # images of element-web develop.
 ARG USE_CUSTOM_SDKS=true
 ARG REACT_SDK_REPO="https://github.com/williamkray/matrix-react-sdk.git"
-ARG REACT_SDK_BRANCH="v3.12.1-custom-with-ponies"
-ARG JS_SDK_REPO="https://github.com/matrix-org/matrix-js-sdk.git"
-ARG JS_SDK_BRANCH="v9.5.1"
+ARG REACT_SDK_BRANCH="wreck/v3.13.1-wrecked"
+ARG JS_SDK_REPO="https://github.com/williamkray/matrix-js-sdk.git"
+ARG JS_SDK_BRANCH="wreck/v9.6.0-wrecked"
 
 RUN apt-get update && apt-get install -y git dos2unix \
 # These packages are required for building Canvas on architectures like Arm
